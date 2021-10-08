@@ -3,8 +3,8 @@ const store = require('./message.store');
 function addMessage(user,message){
     return new Promise((resolve, reject ) => {
         if (!user || !message){
-            console.error('[messageController] No hay usuario o mensaje')
-            return reject('Los datos son incorrectos');
+            console.error('[message.Controller] No hay usuario o mensaje')
+            return reject('Invalid data');
         }
 
         const fullMessage = {
@@ -25,7 +25,21 @@ function getMessage() {
     }))
 }
 
+function updateMessage(id, message) {
+    return new Promise(async (resolve, reject) => {
+        if (!id || !message) {
+            console.log('[message.Controller] No hay mensaje o id');
+            return reject('Data inconsistente')
+        }
+
+        const result = await store.update(id, message)
+
+        resolve(result);
+    })
+}
+
 module.exports = {
     addMessage,
     getMessage,
+    updateMessage,
 }

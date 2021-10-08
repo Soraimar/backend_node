@@ -1,4 +1,3 @@
-const express = require('express');
 const message = require('../components/message/message.network')
 
 function routes (server){
