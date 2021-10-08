@@ -1,14 +1,24 @@
-const list = []; //aqui se guardan todos los mensajes
+require('../../connection'); // importa el archivo de conexión
+const messageModel = require('./menssage.model'); // importa el esquema
 
-function addMessage(message){
-    list.push(message);
+async function addMessage(message){
+    const sms = new messageModel(message); // crea la entidad
+    try {
+        await sms.save();
+        console.log(sms);
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 function getMessages(){
-    return list;
+    return [];
 }
 
 module.exports = {
-    addMessage,
-    getMessages,
+    add: addMessage,
+    list: getMessages,
+    // get
+    // update
+    // delete
 }

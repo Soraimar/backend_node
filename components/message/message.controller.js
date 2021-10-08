@@ -13,15 +13,15 @@ function addMessage(user,message){
             date: new Date()
         }
 
-        store.addMessage(fullMessage);
+        store.add(fullMessage);
 
         resolve(fullMessage);
     });
 }
 
 function getMessage() {
-    return new Promise(((resolve, reject) => {
-        resolve(store.getMessages());
+    return new Promise(((resolve) => {
+        resolve(store.list());
     }))
 }
 

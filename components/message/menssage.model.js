@@ -1,3 +1,10 @@
-const mongoos = require('mongoose');
+const mongoose = require('mongoose');
 
-const Schema = mongoos.Schema;
+const messageSchema = new mongoose.Schema({
+    user: String,
+    message: String,
+    date: Date
+});
+
+const carro = mongoose.model('messages', messageSchema);
+module.exports = carro;
