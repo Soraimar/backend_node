@@ -1,4 +1,4 @@
-require('../../connection'); // importa el archivo de conexión
+const db = require('../../connection'); // importa el archivo de conexión
 const messageModel = require('./menssage.model'); // importa el esquema
 
 async function addMessage(message){

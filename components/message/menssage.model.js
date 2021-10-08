@@ -2,9 +2,12 @@ const mongoose = require('mongoose');
 
 const messageSchema = new mongoose.Schema({
     user: String,
-    message: String,
-    date: Date
+    message: {
+        type: String,
+        required : true,
+    },
+    date: Date,
 });
 
-const carro = mongoose.model('messages', messageSchema);
-module.exports = carro;
+const model = mongoose.model('messages', messageSchema);
+module.exports = model;
