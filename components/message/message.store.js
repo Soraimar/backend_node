@@ -1,4 +1,5 @@
-const messageModel = require('./menssage.model'); // importa el esquema
+const messageModel = require('./menssage.model');
+const {response} = require("express"); // importa el esquema
 
 async function addMessage(message){
     const newMessage = new messageModel(message); // crea la entidad
@@ -10,12 +11,21 @@ async function addMessage(message){
     }
 }
 
-async function getMessages(filterMessage){
-    let filter = {}
-    if (filterMessage){
-        filter =  {user : filterMessage}
-    }
-    return messageModel.find(filter);
+async function getMessages(filterUser){
+    return new Promise((resolve, reject) =>{
+        let filter = {}
+        if (filterUser !== null){
+            filter =  {user : filterUser}
+        }
+        messageModel.find(filter)
+            .populate('user') // se le indica lo que es lo que populara
+            .exec((error, populated)=>{ //se debe indicar que se ejecute
+                if(error){
+                    return reject(error);
+                }
+                resolve(populated);
+            })
+    })
 }
 
 async function updateText(id, message) {

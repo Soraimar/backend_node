@@ -1,4 +1,5 @@
 const store = require('./message.store');
+const {Schema} = require("mongoose");
 
 function addMessage(user,message){
     return new Promise((resolve, reject ) => {
@@ -17,9 +18,9 @@ function addMessage(user,message){
     });
 }
 
-function getMessage(filterMessage) {
+function getMessage(filterUser) {
     return new Promise(((resolve) => {
-        resolve(store.list(filterMessage));
+        resolve(store.list(filterUser));
     }))
 }
 
