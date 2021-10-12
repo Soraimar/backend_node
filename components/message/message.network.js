@@ -5,8 +5,8 @@ const controller = require('./message.controller')
 const router = express.Router();
 
 router.get('/', function(req, res){
-
-    controller.getMessage()
+    const filterMessage = req.query.user || null;
+    controller.getMessage(filterMessage)
         .then((messageList) => {
             response.success(req, res, messageList , 200)
         })
@@ -34,6 +34,17 @@ router.patch('/:id', function (req,res){
         .catch(error => {
             response.error(req, res , 'error updating message', 500);
         })
+})
+
+router.delete('/:id', function (req,res){
+    controller.deleteMessage(req.params.id)
+        .then(() => {
+            response.success(req,res, `Message ${req.params.id} eliminado`, 200)
+        })
+        .catch(error =>{
+            response.error(req, res, 'error interno', 500, error)
+        })
+
 })
 
 module.exports = router;

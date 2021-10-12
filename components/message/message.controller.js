@@ -19,9 +19,9 @@ function addMessage(user,message){
     });
 }
 
-function getMessage() {
+function getMessage(filterMessage) {
     return new Promise(((resolve) => {
-        resolve(store.list());
+        resolve(store.list(filterMessage));
     }))
 }
 
@@ -38,8 +38,26 @@ function updateMessage(id, message) {
     })
 }
 
+function deleteMessage(id) {
+    return new Promise(async (resolve, reject) =>{
+        if (!id){
+            console.log('[message.Controller] Id no especificado');
+            return reject('Id invalid')
+        }
+        store.delete(id)
+            .then(()=>{
+                resolve();
+            })
+            .catch(e=>{
+                reject(e);
+            })
+    });
+}
+
+
 module.exports = {
     addMessage,
     getMessage,
     updateMessage,
+    deleteMessage,
 }
