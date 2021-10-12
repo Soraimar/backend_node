@@ -1,5 +1,4 @@
 const store = require('./message.store');
-const {Schema} = require("mongoose");
 
 function addMessage(user,message){
     return new Promise((resolve, reject ) => {

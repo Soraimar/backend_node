@@ -1,5 +1,4 @@
 const messageModel = require('./menssage.model');
-const {response} = require("express"); // importa el esquema
 
 async function addMessage(message){
     const newMessage = new messageModel(message); // crea la entidad
