@@ -1,16 +1,22 @@
-// de esta forma son los import de JS
 const express = require('express');
-const bodyParser = require('body-parser');
+const dbConnect = require('./dataBase');
+require('dotenv').config({path:".env"})
 
 const router = require('./network/router');
 
-let app = express();
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:false}));
+dbConnect(process.env.MONGODB_URL).then(() => console.log("[db] successfully connected"));
+
+const app = express();
+const PORT = 3000;
+
+app.use(express.json());
+app.use(express.urlencoded({extended:false}));
+
+//cargamos el servidor a las rutas para que "prenda"
 router(app);
 
 app.use('/app', express.static('public'));
 
-app.listen(3000);
-
-console.log('La aplicacion esta escuchando en el puerto http://localhost:3000');
+app.listen(PORT, () =>{
+    console.log(`La app está escuchando en http://localhost:${PORT}`);
+});

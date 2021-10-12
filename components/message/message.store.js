@@ -1,4 +1,3 @@
-const db = require('../../connection'); // importa el archivo de conexión
 const messageModel = require('./menssage.model'); // importa el esquema
 
 async function addMessage(message){
@@ -12,12 +11,11 @@ async function addMessage(message){
 }
 
 async function getMessages(filterMessage){
-    console.log("filterMessage:: " + filterMessage);
     let filter = {}
     if (filterMessage){
         filter =  {user : filterMessage}
     }
-    return await messageModel.find( filter);
+    return messageModel.find(filter);
 }
 
 async function updateText(id, message) {
