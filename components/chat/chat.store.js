@@ -9,6 +9,20 @@ async function addChat(chat){
     }
 }
 
+async function getAllChat(){
+    return new Promise((resolve , reject)=>{
+        chatModel.find()
+            .populate('users')
+            .exec((error, populated)=>{
+                if(error){
+                    return reject(error);
+                }
+                resolve(populated);
+            })
+    })
+}
+
 module.exports = {
     add: addChat,
+    getList: getAllChat,
 }

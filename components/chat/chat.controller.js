@@ -17,6 +17,12 @@ async function createChat(users){
 
 }
 
+async function getAllChat(){
+    console.log('[chat.controller]');
+    return await store.getList();
+}
+
 module.exports ={
-    createChat
+    createChat,
+    getAllChat
 }
