@@ -1,25 +1,20 @@
 const store = require('./chat.store')
 
 async function createChat(users){
-    return new Promise((resolve ,reject)=>{
-        if (!users){
-            console.log('[chat.controller] No users');
-            return reject('Invalid data');
-        }
+    if (!users || !Array.isArray(users)){
+        console.log('[chat.controller] No users');
+        return Promise.reject('Invalid data');
+    }
 
-        const chat = {
-            users : users,
-        }
+    const chat = {
+        users : users,
+    }
 
-        console.log(chat);
-        store.add(chat).then(()=> resolve(chat))
-    })
-
+    return await store.add(chat)
 }
 
-async function getAllChat(){
-    console.log('[chat.controller]');
-    return await store.getList();
+async function getAllChat(userId){
+    return await store.getList(userId);
 }
 
 module.exports ={

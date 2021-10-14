@@ -10,19 +10,19 @@ router.post('/', function (req, res){
             response.success(req,res,chat,200);
         })
         .catch(error => {
-            response.success(req, res , 'Internal error',`Error en el controlador: ${error}`);
+            response.success(req, res , 'Internal error',error);
         })
 })
 
 //get donde se pueda listar todos los chat
-router.get('/', function(req,res){
+router.get('/:userId', function(req,res){
     console.log('[chat.network]');
-   controller.getAllChat()
+   controller.getAllChat(req.params.userId)
        .then((chatList)=>{
            response.success(req,res,chatList,200);
        })
        .catch(error => {
-           response.success(req, res , 'Internal error',`Error en el controlador: ${error}`);
+           response.success(req, res , 'Internal error',error);
        })
 });
 

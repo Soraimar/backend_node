@@ -10,7 +10,7 @@ router.post('/', function (req,res){
             response.success(req, res, data , 201)
         })
         .catch(error => {
-            response.error(req,res,'Internal error', 500, `Error en el controlador: ${error}` );
+            response.error(req,res,'Internal error', 500, error);
         })
 
 });
@@ -22,7 +22,7 @@ router.get('/', function(req,res){
             response.success(req, res, data , 201)
         })
         .catch(error => {
-            response.error(req,res,'Internal error', 500, `Error en el controlador: ${error}`);
+            response.error(req,res,'Internal error', 500, error);
         })
 });
 

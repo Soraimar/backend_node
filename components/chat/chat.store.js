@@ -3,15 +3,21 @@ const chatModel = require('./chat.model')
 async function addChat(chat){
     const newChat = new chatModel(chat);
     try {
-        await newChat.save();
+        return await newChat.save();
     }catch (error){
         console.log("[chat.store]" + error);
     }
 }
 
-async function getAllChat(){
+async function getAllChat(userId){
     return new Promise((resolve , reject)=>{
-        chatModel.find()
+        let filter = {}
+        if (userId){
+            filter = {
+                userId : userId,
+            }
+        }
+        chatModel.find(filter)
             .populate('users')
             .exec((error, populated)=>{
                 if(error){
