@@ -11,6 +11,11 @@ const messageSchema = new Schema({
         type: String,
         required : true,
     },
+    chat: {
+        type: Schema.ObjectId,
+        ref: 'chats'
+    },
+    file: String,
     date: Date,
 });
 

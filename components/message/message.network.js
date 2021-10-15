@@ -1,7 +1,24 @@
 const express = require('express');
+const multer = require('multer');
 const response = require('../../network/response');
-const controller = require('./message.controller')
+const controller = require('./message.controller');
 const router = express.Router();
+
+const upload = multer({
+    dest : 'public/files/'
+})
+
+router.post('/', upload.single('file') ,function(req,res){
+
+    console.log(req.file)
+    controller.addMessage(req.body.user, req.body.message, req.body.chat, req.file)
+        .then((data) =>{
+            response.success(req, res, data , 201)
+        })
+        .catch((error) => {
+            response.error(req,res,'Internal error', 500, error);
+        })
+});
 
 router.get('/', function(req, res){
     const filterUser= req.query.user || null;
@@ -12,17 +29,6 @@ router.get('/', function(req, res){
         .catch((error) =>{
             response.error(req,res,'Unexpectd Error ', 400, error);
         });
-});
-
-router.post('/',function(req,res){
-
-    controller.addMessage(req.body.user, req.body.message)
-        .then((data) =>{
-            response.success(req, res, data , 201)
-        })
-        .catch((error) => {
-            response.error(req,res,'Internal error', 500, error);
-        })
 });
 
 router.patch('/:id', function (req,res){

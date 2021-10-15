@@ -1,6 +1,6 @@
 const store = require('./chat.store')
 
-async function createChat(users){
+async function addChat(users){
     if (!users || !Array.isArray(users)){
         console.log('[chat.controller] No users');
         return Promise.reject('Invalid data');
@@ -18,6 +18,6 @@ async function getAllChat(userId){
 }
 
 module.exports ={
-    createChat,
+    addChat,
     getAllChat
 }

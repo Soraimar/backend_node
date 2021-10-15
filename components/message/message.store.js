@@ -18,6 +18,7 @@ async function getMessages(filterUser){
         }
         messageModel.find(filter)
             .populate('user') // se le indica lo que es lo que populara
+            .populate('chat')
             .exec((error, populated)=>{ //se debe indicar que se ejecute
                 if(error){
                     return reject(error);

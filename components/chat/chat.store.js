@@ -14,7 +14,7 @@ async function getAllChat(userId){
         let filter = {}
         if (userId){
             filter = {
-                userId : userId,
+                users : userId,
             }
         }
         chatModel.find(filter)
